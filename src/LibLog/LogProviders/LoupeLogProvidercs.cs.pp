@@ -45,7 +45,13 @@ namespace $rootnamespace$.Logging.LogProviders
         /// <value>
         ///     <c>true</c> if [provider is available override]; otherwise, <c>false</c>.
         /// </value>
-        public static bool ProviderIsAvailableOverride { get; set; } = true;
+        private static bool s_providerIsAvaiableOverride = true;
+
+        public static bool ProviderIsAvailableOverride
+        {
+            get { return s_providerIsAvaiableOverride; }
+            set { s_providerIsAvaiableOverride = value; }
+        }
 
         public override Logger GetLogger(string name)
         {
@@ -134,7 +140,7 @@ namespace $rootnamespace$.Logging.LogProviders
                     case LogLevel.Fatal:
                         return TraceEventTypeValues.Critical;
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(logLevel));
+                        throw new ArgumentOutOfRangeException("logLevel");
                 }
             }
         }

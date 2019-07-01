@@ -22,19 +22,33 @@ namespace $rootnamespace$.Logging.LogProviders
             s_pushProperty = GetPushProperty();
         }
 
-        public static bool ProviderIsAvailableOverride { get; set; } = true;
+        private static bool s_providerIsAvailableOverride = true;
+
+        public static bool ProviderIsAvailableOverride
+        {
+            get { return s_providerIsAvailableOverride; }
+            set { s_providerIsAvailableOverride = value; }
+        }
 
         public override Logger GetLogger(string name)
-            => new SerilogLogger(_getLoggerByNameDelegate(name)).Log;
+        {
+            return new SerilogLogger(_getLoggerByNameDelegate(name)).Log;
+        }
 
         internal static bool IsLoggerAvailable()
-            => ProviderIsAvailableOverride && GetLogManagerType() != null;
+        {
+            return ProviderIsAvailableOverride && GetLogManagerType() != null;
+        }
 
         protected override OpenNdc GetOpenNdcMethod()
-            => message => s_pushProperty("NDC", message, false);
+        {
+            return (message) => s_pushProperty("NDC", message, false);
+        }
 
         protected override OpenMdc GetOpenMdcMethod()
-            => (key, value, destructure) => s_pushProperty(key, value, destructure);
+        {
+            return (key, value, destructure) => s_pushProperty(key, value, destructure);
+        }
 
         private static Func<string, object, bool, IDisposable> GetPushProperty()
         {
@@ -63,7 +77,9 @@ namespace $rootnamespace$.Logging.LogProviders
         }
 
         private static Type GetLogManagerType()
-            => FindType("Serilog.Log", "Serilog");
+        {
+            return FindType("Serilog.Log", "Serilog");
+        }
 
         private static Func<string, object> GetForContextMethodCall()
         {
