@@ -114,8 +114,8 @@ namespace YourRootNamespace.Logging
         }
 
         internal static ILogProvider CurrentLogProvider
-        { 
-            get { return s_currentLogProvider; } 
+        {
+            get { return s_currentLogProvider; }
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace YourRootNamespace.Logging
 #else
         internal
 #endif
-        static ILog For<T>() 
+        static ILog For<T>()
         {
             return GetLogger(typeof(T));
         }
@@ -249,10 +249,10 @@ namespace YourRootNamespace.Logging
         static readonly List<Tuple<IsLoggerAvailable, CreateLogProvider>> LogProviderResolvers =
                 new List<Tuple<IsLoggerAvailable, CreateLogProvider>>
         {
-            new Tuple<IsLoggerAvailable, CreateLogProvider>(SerilogLogProvider.IsLoggerAvailable, () => new SerilogLogProvider()),
+            new Tuple<IsLoggerAvailable, CreateLogProvider>(LoupeLogProvider.IsLoggerAvailable, () => new LoupeLogProvider()),
             new Tuple<IsLoggerAvailable, CreateLogProvider>(NLogLogProvider.IsLoggerAvailable, () => new NLogLogProvider()),
             new Tuple<IsLoggerAvailable, CreateLogProvider>(Log4NetLogProvider.IsLoggerAvailable, () => new Log4NetLogProvider()),
-            new Tuple<IsLoggerAvailable, CreateLogProvider>(LoupeLogProvider.IsLoggerAvailable, () => new LoupeLogProvider()),
+            new Tuple<IsLoggerAvailable, CreateLogProvider>(SerilogLogProvider.IsLoggerAvailable, () => new SerilogLogProvider())
         };
 
 #if !LIBLOG_PROVIDERS_ONLY
@@ -303,8 +303,8 @@ namespace YourRootNamespace.Logging
             internal static readonly NoOpLogger Instance = new NoOpLogger();
 
             public bool Log(LogLevel logLevel, Func<string> messageFunc, Exception exception, params object[] formatParameters)
-            { 
-                return false; 
+            {
+                return false;
             }
         }
 #endif
