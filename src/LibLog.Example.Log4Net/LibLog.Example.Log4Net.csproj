@@ -4,6 +4,8 @@
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>doublnt.yinxi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibLog.Example.Library\LibLog.Example.Library.csproj" />

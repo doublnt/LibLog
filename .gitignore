@@ -108,3 +108,4 @@ artifacts
 /src/.vs
 /src/.idea
 *.nupkg
+*.snk

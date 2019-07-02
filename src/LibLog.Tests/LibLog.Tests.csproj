@@ -2,6 +2,8 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0;net461;net452</TargetFrameworks>
     <RootNamespace>LibLog.Logging</RootNamespace>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>doublnt.yinxi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Gibraltar.Agent" Version="4.7.10" Condition=" '$(TargetFramework)' == 'net452' " />
